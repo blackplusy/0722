@@ -268,6 +268,39 @@ e.IP地址
 	                          1100 0000.1010 1000.0000 0110.0000 0000
 	                          192      .168      .6        .0
 	                          
+3.安装部署ecshop项目
+	开源网店项目
+	开发语言:   		php
+	web服务器:  		apache
+	数据库服务器:    mysql
+	a.集成工具
+		wamp       w:windows  a:apache m:mysql p:php
+		xampp      x:任意操作系统
+		phpstudy   
+	b.安装phpstudy
+	c.文件夹简介
+		apache 
+			bin   存放apache命令
+			conf  存放apache配置文件
+			logs  存放apache的日志文件
+			httpd.conf apache的配置文件
+		mysql
+			bin   存放mysql命令
+			data  存放mysql数据
+			my.ini mysql的配置文件
+		WWW
+			web项目所在文件夹
+	d.把下载好的压缩包解压后放入www文件夹中
+	e.浏览器中输入127.0.0.1/ecshop
+		数据库主机：localhost
+		端口号：    3306
+		用户名:     root
+		密码:       root
+		数据库名:   test
+	f.补充：
+		前台:127.0.0.1/ecshop
+		后台:127.0.0.1/ecshop/admin
+
 
 
 
