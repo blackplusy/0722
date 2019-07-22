@@ -184,8 +184,12 @@ c.抓包数据
 		状态码
 		web服务器软件版本
 	c5.响应体信息
-
-
-
-
-
+补充:
+fiddler使用
+	a.安装(傻瓜安装)
+	b.基本使用
+	c.断点调试
+	设置断点 bpu http://www3.ecmoban.com
+	取消断点 bpu
+	设置断点 bpu http://www3.ecmoban.com/user.php
+	取消断点 bpu
