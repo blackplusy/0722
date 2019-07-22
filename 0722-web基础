@@ -44,6 +44,114 @@ c.c/s架构软件
     	32位  i386 i586 i686
     	64位  x64  x86_64
 
+2.b/s架构的后端
+	前端
+		html 标记性 支撑网页结构 静态网页(在服务上什么样子，在网页上什么样子)
+		js   javascript   动态网页(动画、交互) 前端开发
+			 java         后端开发语言
+			 jsp          java server page
+			 js框架       jquery
+		css  样式表 网页美化
+		ui   用户接口
+	后端
+		操作系统
+		web服务器
+			apache   缺点:不支持java
+			tomcat   支持java
+			nginx    负载均衡，反向代理
+			iis      微软
+		数据库服务器
+			oracle    中大型
+			mysql     互联网公司
+			sqlserver 传统行业
+	补充(常见搭配)
+		操作系统         web服务器      数据库服务器
+		win                iis             sqlserver/access
+		                  apache           mysql
+		                  tomcat           mysql/oracle
+		linux             apcahe           mysql          (LAMP)
+		                  nginx            mysql          (LNMP)
+		                  tomcat           mysql/oracle
+
+3.访问网站的流程
+	1>浏览器中输入网址(www.sina.coim)
+	2>系统到hosts文件中搜索是否有网址(www.sina.com)对应IP地址，如果有，直接通过IP地址进行访问
+		hosts文件作用:临时的dns服务
+	3>如果hosts文件中没有对应配置，数据会通过网络传输到DNS服务器(域名解析服务器)解析域名为IP地址
+	4>数据通过网络传输到网站服务器IP地址的web服务器中
+	5>web服务器对发送过来的请求进行解析，并且发送数据请求给数据库
+	6>数据库发回对应数据给web服务
+	7>web服务器整合数据后发回到浏览器中
+
+4.URL的组成
+	https://s.taobao.com:80/goods/search?q=%E5
+	URL：统一资源定位器
+	URL的组成
+		1>协议
+		2>域名
+		3>端口
+		4>虚拟目录
+		5>访问的文件
+		6>访问文件的参数
+	1>协议
+		一组规则规范
+		http协议(超文本传输协议)
+		http协议规定数据先传什么，后传什么，怎么传输等等
+		超文本(富文本):声音、图像、视频等
+		普通文本
+		http协议特点：无状态(彼此不记录过去的行为)
+		http协议请求:
+			get    主要用于浏览数据，请求的数据显示在URL上，相对不安全
+				https://s.taobao.com/search?q=zara&imgfile=&js=1&stats_click=search_radio_all%3A1&initiative_id=staobaoz_20190722&ie=utf8
+				https://s.taobao.com/search?q=lv&imgfile=&js=1&stats_click=search_radio_all%3A1&initiative_id=staobaoz_20190722&ie=utf8
+			post   主要用于提交数据，请求信息显示在请求体中，相对安全
+		注意:请求分为请求头和请求体，响应分为响应头和响应体，相当于信封和信件关系
+		cookie&session
+		cookie   访问记录、验证信息  广告定投 存放在客户端
+		session  验证信息  会话保持、30分钟超时
+		状态码
+		200      2开头请求成功
+		302      3开头移动或者缓存(重定向)
+		404      4开头客户端请求有问题
+		500      5开头服务端有问题
+	2>域名
+		10.10.101.3   www.baidu.com
+		192.168.7.33  www.google.com
+		FQDN(完全合格域名)
+			www.sina.com.cn
+			www.doyu.tv
+		DNS(域名解析服务器)
+			电信:202.96.134.133
+			正向解析(域名--IP)
+				1.win+r--cmd--ping www.baidu.com
+				2.win+r--cmd--nslookup www.baidu.com
+			反向解析(IP--域名)
+				win+r--cmd--nslookup 14.215.177.38
+	3>端口
+		区分应用层进程的标识
+		mysql 				3306
+		oracle              1521
+		apache/nginx/iis 	80
+		tomcat              8080
+		ssh                 22
+		电脑需要安装2个mysql服务器，出现端口冲突，解决办法：其中一个改变端口
+		在电脑中查看端口
+		win+r--cmd 打开命令提示符
+		netstat -an 查看电脑中开放的所有端口
+		netstat -an | find "135" 查看电脑中是否开启135端口
+		|   	管道：前面的输出作为后面的输入
+		find   	搜索
+	4>抓包
+		a.常用抓包软件
+			F12
+			httpwatch
+			fiddler
+			wireshark
+			burpsuite
+		b.抓包原理
+			浏览器、客户端====抓包工具=====服务器
+			
+
 
 
 
