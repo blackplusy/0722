@@ -81,11 +81,74 @@
 			price int,
 			ddate date
 		);
+		create table goods(name char(20),price int...);
 		查看表结构
 		desc 表名;
 		需求:查看goods表表结构
 			desc goods;
+	c.表结构的修改
+		新增列
+		需求:goods表中增加列id 数字类型
+		alter table goods add id int;
+		修改列
+		需求:goods表中id列修改为字符类型
+		alter table goods modify id char(10);
+		删除列
+		需求:删除goods表中id列
+		alter table goods drop column id;
+	d.删除表结构
+		语法:drop table 表;
+		需求:删除goods表
+		drop table goods;
+6.SQL的分类
+	SQL:结构化查询语言
+	DDL:数据库定义语言   create alter drop truncate
+	DML:数据库操作语言   insert update delete
+	DCL:数据库控制语言   grant  revoke
+	DQL:数据库查询语言   select
+7.mysql中数据的增删改
+	a.数据的新增
+		注意:
+		1>字符类型需要加单引号
+		2>数字类型直接使用
+		3>日期类型需要加单引号
+		表中列的顺序和值的顺序要对应
+		a1.向表中所有列新增数据
+			语法:insert into 表 values(值1,值2,值3。。。。);
+			向goods表中新增数据，名字为simida，价格250，出厂日期 2000-01-01
+			insert into goods values('simida',250,'2000-01-01');
+		a2.向表中指定列新增数据
+			语法:insert into 表(列1,列2....) values(值1,值2....);
+			向goods表中新增数据，名字tank，价格100
+			insert into goods(name,price) values('tank',100);
+		a3.新增多条数据
+			insert into goods values('simida',250,'2000-01-01'),('kouniqiwa',100,'2008-01-01'),('baga',1000,'1997-01-01');
+	b.数据的修改
+		语法:update 表 set 列=值 where 条件;
+		如果不加where条件，默认修改的是整个列的数据，如果增加where，修改的是指定数据
+			goods表中名字为simida的价格修改为0
+			update goods set price=0 where name='simida';
+			goods表中所有商品价格都设置为999
+			update goods set price=999;
+	c.数据的删除
+		delete   删除指定数据，删除数据可以找回，DML
+		truncate 删除所有数据，删除数据无法找回，DDL
+		c1.delete
+		语法:delete from 表 where 条件
+		如果增加where条件，删除指定数据
+			删除goods表中名字为simida的数据
+			delete from goods where name='simida';
+		如果不加where条件，删除表中所有数据
+			删除goods表中所有数据
+			delete from goods;
+		c2.truncate
+		语法:truncate table 表;
+			删除goods表中所有数据
+			truncate table goods;
 			
+
+
+
 		
 
 
