@@ -251,24 +251,25 @@
 	子查询分为单行子查询和多行子查询
 	单行子查询:查询子句返回的结果只有1行，可以用in或者等号
 	多行子查询：查询子句返回的结果有多行，只能用in
+
+11.sakila数据库的导入
+	1.下载sakila数据库
+		https://dev.mysql.com/doc/index-other.html
+	2.解压已经下载好的安装包
+	3.命令提示符进入到解压后的文件夹中
+	4.登陆mysql数据库
+		mysql -u root -p
+	5.导入sakila-schema.sql,导入表结构
+		source sakila-schema.sql;
+	6.导入sakila-data.sql,导入数据
+		source sakila-data.sql;
+
+查询以C开头的国家有哪些城市?
 	
 
-
-
-
-
-
-
-
+查询客户表中名字为MARY的所在城市?
 	
 
-
-		
-
-
-
-
-
-
-
+查询客户表中客户名字为MARY的所在国家?
+	
 
