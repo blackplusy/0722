@@ -1,0 +1,97 @@
+1.常见的数据库
+	关系型数据库
+		informix 	IBM+HP 军、政、运、银   小机
+		db2      	IBM    军、政、运、银   
+		oracle   	甲骨文  中大型
+		mysql    	甲骨文  互联网
+		sqlserver	微软    传统
+	非关系型数据库
+		mongodb     大数据、爬虫
+		redis       缓存、消息队列
+		Cassandra   facebook 
+2.mysql数据库
+	c/s架构软件
+	a.mysql的服务
+		mysql     mysql的客户端服务
+		mysqld    mysql的主服务
+		win+r--cmd
+		tasklist | find "mysqld"
+		tasklist  查看系统中所有进程
+		|         管道,前面的输出作为后面的输入
+		find      搜索
+	b.mysql的端口
+		3306
+		win+r--cmd
+		netstat -an | find "3306"
+	c.mysql的管理员
+		root
+3.mysql的登陆
+	a.mysql的登陆命令(命令提示符)
+		mysql
+			登陆本地数据库
+		mysql -u root -p
+			管理员登陆本地数据库
+		mysql -h 127.0.0.1 -u root -p
+			管理员登陆IP为127.0.0.1的数据库
+	b.mysql的登陆方式
+		b1.进入到mysql的bin文件夹执行
+			d:
+			cd phpStudy\MySQL\bin
+		b2.设置环境变量
+			让系统可以找到mysql命令
+			计算机--属性--高级--环境变量--系统变量--Path中添加
+			;MySQL的bin文件夹路径
+			;D:\phpStudy\MySQL\bin
+			确定--确定--确定
+4.mysql的基础命令(登录之后)
+	数据库分为数据库软件、数据库数据
+	常说的数据库是数据库数据
+	mysql数据库是由表组成
+	mysql的表是由数据组成
+	show databases;
+		查看当前有哪些数据库
+	select database();
+		查看当前数据库的名字
+	use test;
+		数据库切换为test
+	show tables;
+		查看当前数据库中有哪些表
+	select * from ecs_goods;
+	select * from ecs_goods\G;	
+		查看表ecs_goods表中所有数据
+5.表结构操作
+	表，类似于表格，有行、列、表头、表名
+	a.数据类型
+		数字  123 456  		int
+		字符  'abc' '123'   char  varchar
+		日期  '2019-01-01'  date
+	char和varchar区别
+	char    定长   char(10) 6
+	varchar 变长   varchar(10) 6
+	b.表结构创建
+		语法:create table 表(
+			列  数据类型，
+			列  数据类型，
+			。。。
+			)
+		需求:创建表goods(商品表)，里面3个列，商品名称name，字符类型最多20个字符，
+		商品价格 price，数字类型，出厂日期ddate 日期类型
+		create table goods(
+			name char(20),
+			price int,
+			ddate date
+		);
+		查看表结构
+		desc 表名;
+		需求:查看goods表表结构
+			desc goods;
+			
+		
+
+
+
+
+
+
+
+
