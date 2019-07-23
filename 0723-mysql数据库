@@ -221,7 +221,37 @@
 		in 在...里面,或者的关系
 			需求:查询ecs_goods表中商品名称是KD876或者诺基亚的所有信息
 			select * from ecs_goods where goods_name in ('KD876','诺基亚');
-			
+
+10.子查询
+	一条SQL语句的执行依赖于另外一条SQL语句的执行结果
+	需求:查询商品名称为KD876的分类名称
+	1.分析列
+		商品名称
+		分类名称
+	2.分析表
+		商品名称  ecs_goods
+		分类名称  ecs_category
+	3.拆分
+		a.查询ecs_goods表中满足条件的cat_id
+		select cat_id from ecs_goods where goods_name='KD876'; ---4
+		b.查询ecs_category表中cat_id为上面查询出来结果的分类名称
+		select cat_name from ecs_category where cat_id=(select cat_id from ecs_goods where goods_name='KD876');
+	需求:查询分类名称是3G手机的所有商品名称
+	1.分析列
+		分类名称
+		商品名称
+	2.分析表
+		ecs_goods
+		ecs_category
+	3.差分
+		a.查询ecs_category表中满足条件的cat_id
+		select cat_id from ecs_category where cat_name='3G手机';
+		b.查询ecs_goods表中cat_id为上面查询出来结果的商品名称
+		select goods_name from ecs_goods where cat_id=(select cat_id from ecs_category where cat_name='3G手机');
+	子查询分为单行子查询和多行子查询
+	单行子查询:查询子句返回的结果只有1行，可以用in或者等号
+	多行子查询：查询子句返回的结果有多行，只能用in
+	
 
 
 
