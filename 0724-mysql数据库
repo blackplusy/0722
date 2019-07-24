@@ -155,3 +155,130 @@ select 列 from 表1 inner join 表2 on 表1.列=表2.列;
 	and   c.city_id=a.city_id
 	and   a.address_id=cu.address_id
 	and   cu.first_name='MARY';
+--1.jpg
+1.select * from test1 where department='计算机系' and place='北京';
+2.update test1 set department='信息学院' where department='计算机系';
+3.
+select  t1.no,t1.name,t2.grade,t2.courses from test1 t1,test2 t2
+where t1.no=t2.no and t2.grade>=75;
+
+--2.jpg
+1.select  s.name from student s,achievement a
+where s.id=a.id and a.mark>85;
+2.count(*)  计数
+select count(id) from achievement where mark>=90;
+3.
+insert into achievement values((select id from student where name='Robert'),80);
+4.
+update achievement set mark=87 where id=(select id from student where name='Rose');
+5.
+delete from achievement where id=(select id from student where name='Betty');
+delete from student where name='Betty';
+
+--4.jpg
+1.select s$,grade from sc where c#='C2';
+2.select sname from s where sname like 'D%';
+3.
+select  s.s#,s.sname from s,sc,c
+where s.s#=sc.s# and c.c#=sc.c#
+and c.cname='Maths';
+4.
+select s# from sc where c# in ('C2','C4');
+
+----------------------------------------------------------------------------------------------
+左联查询和右联查询
+左联查询(左表中数据都有)
+语法:select 列 from 左表 left join 右表 on 左表.列=右表.列;
+左联查询的结果
+内联查询结果+左表中有，右表中没有的，右表中显示为空
+create table a (
+	a int
+);
+insert into a values(1),(2),(3);
+
+create table b (
+	a int,
+	b char(10)
+);
+insert into b values(1,'a'),(2,'b'),(4,'d');
+select * from a;
+select * from b;
+select * from a,b where a.a=b.a;
+select * from a left join b on a.a=b.a;
+右联查询(右表中数据都有)
+语法:select 列 from 左表 right join 右表 on 左表.列=右表.列;
+右联查询结果
+内联查询结果+右表中有，左表中没有的，左表显示为空
+
+--------------------------------------------------------------------------------------------
+--7.jpg
+1.
+a.查询c表中满足条件的c#
+	select c# from c where cn='税收基础';
+b.查询sc表中c#为上面查询出来的s#
+	select s# from sc where c# in (select c# from c where cn='税收基础');
+c.查询s表中s#为上面查询出来结果的学号和姓名
+	select s#，sn from s where s# in (select s# from sc where c# in (select c# from c where cn='税收基础'));
+2.
+a.查询sc表中满足条件的s#
+	select s# from sc where c#='C2';
+b.查询s表中s#为上面查询出来的sn和sd
+	select sn,sd from s where s# in (select s# from sc where c#='C2');
+3.
+select sn,sd from s where s# in (select s# from sc where c#!='C5');
+
+
+--3.png
+1.avg() 平均值
+a.查询除平均薪资是多少
+	select avg(salary) from dt_pay;
+b.查询薪资大于平均的
+	select * from dt_pay where salary >(select avg(salary) from dt_pay);
+2.
+select * from dt_pay;
+3.
+truncate table dt_pay;
+----------------------------------------------------------------------------------------
+分组查询
+按照某种属性进行分类
+1.分组函数(聚合函数)
+max()  最大
+min()  最小
+avg()  平均
+sum()  求和
+count()计数
+分组函数通常是和分组一起使用的，但是也可以单独使用
+需求:查询ecs_goods表中最高、最低、平均本店售价是多少
+select max(shop_price),min(shop_price),avg(shop_price) from ecs_goods;
+select max(shop_price),min(shop_price),round(avg(shop_price),2) from ecs_goods;
+需求:查询ecs_goods表中最高本店售价的商品名称
+select max(shop_price) from ecs_goods;
+select goods_name from ecs_goods where shop_price=(select max(shop_price) from ecs_goods);
+2.分组查询
+语法:select 列 from 表 where 条件
+		group by 分组条件
+			having 分组后过滤条件;
+一般来说，每后面跟的就是分组条件
+需求:查询ecs_goods表每种分类id有多少个商品，要求显示分类id和商品数量
+select cat_id,count(goods_name)  from ecs_goods group by cat_id;
+需求:查询每种分类对应多少个商品，要求显示分类名称和商品数量
+select c.cat_name,count(g.goods_name) from ecs_goods g,ecs_category c
+where g.cat_id=c.cat_id
+group by c.cat_name;
+3.分组后过滤
+where  分组前过滤，后面不能直接跟分组函数
+having 分组后过滤，后面可以直接跟分组函数
+需求:查询商品数量超过10的分类名称
+a.查询商品表中每个cat_id对应多少个商品，找到数量超过10的cat_id
+select  cat_id from ecs_goods
+group by cat_id
+having count(goods_name)>10;
+
+b.查询分类表中cat_id为上面查询出来结果的分类名称
+select cat_name from ecs_category where cat_id in (select  cat_id from ecs_goods
+group by cat_id
+having count(goods_name)>10);
+
+
+
+
