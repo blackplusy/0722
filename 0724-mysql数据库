@@ -100,9 +100,58 @@ select 列 from 表1 inner join 表2 on 表1.列=表2.列;
 		select g.goods_name from ecs_goods g,ecs_category c
 		where g.cat_id=c.cat_id
 		and c.cat_name='3G手机';
-		
+
 查询以C开头的国家有哪些城市?
+1.分析列
+	国家
+	城市
+2.分析表
+	国家表
+	城市表
+3.关联
+	select * from city c,country co
+	where c.country_id=co.country_id;
+4.过滤
+	select * from city c,country co
+	where c.country_id=co.country_id
+	and co.country like 'C%';
+
 
 查询客户表中名字为MARY的所在城市?
+1.分析列
+	客户名字
+	城市
+2.分析表
+	客户表
+	城市表
+	地址表
+3.关联
+	select * from city c,address a,customer cu
+	where c.city_id=a.city_id
+	and   a.address_id=cu.address_id;
+4.过滤
+	select c.city from city c,address a,customer cu
+	where c.city_id=a.city_id
+	and   a.address_id=cu.address_id
+	and   cu.first_name='MARY';
 
 查询客户表中客户名字为MARY的所在国家?
+1.分析列
+	客户名字
+	国家
+2.分析表
+	国家
+	城市表
+	地址表
+	客户表
+3.关联
+	select * from country co,city c,address a,customer cu
+	where co.country_id=c.country_id
+	and   c.city_id=a.city_id 
+	and   a.address_id=cu.address_id;
+4.过滤
+	select co.country from country co,city c,address a,customer cu
+	where co.country_id=c.country_id
+	and   c.city_id=a.city_id
+	and   a.address_id=cu.address_id
+	and   cu.first_name='MARY';
