@@ -1,0 +1,102 @@
+查询每个国家有多少个城市,要求显示国家名称,城市数量
+1.分析列
+	国家名称
+	城市名称
+2.分析表
+	城市表
+	国家表
+3.关联
+	select * from country co,city c
+	where co.country_id=c.country_id;
+4.过滤
+	select co.country,count(c.city) from country co,city c
+	where co.country_id=c.country_id
+	group by co.country;
+
+查询每个城市有多少个客户(统计客户id),要求显示城市名称,客户数量
+1.分析列
+	城市名称
+	客户id
+2.分析表
+	city
+	address
+	customer
+3.关联
+	select * from city c,address a,customer cu
+	where c.city_id=a.city_id
+	and a.address_id=cu.address_id;
+4.过滤
+	select c.city,count(customer_id) from city c,address a,customer cu
+	where c.city_id=a.city_id
+	and a.address_id=cu.address_id
+	group by c.city;
+
+查询C开头的国家,每个国家有多少个城市
+select co.country,count(c.city) from city c,country co
+where c.country_id=co.country_id
+and co.country like 'C%'
+group by co.country;
+
+----------------------------------------------------------------------------
+1.排序和分页
+a.排序
+	按照某种顺序把数据进行排列
+	顺序(从小到大)
+	order by 列;
+	order by 列 asc;
+	倒序(从大到小)
+	order by 列 desc;
+	语法:
+	select 列 from  表
+		where 条件
+			group by 分组条件
+				having 分组后过滤条件
+					order by 排序条件;
+	需求:查询ecs_goods表中所有数据，按照本店售价从大到小进行排列
+		select * from ecs_goods order by shop_price  desc;
+	需求:查询ecs_goods表中商品名称以诺基亚开头的数据，按照本店售价顺序排列
+		select * from ecs_goods where goods_name like '诺基亚%' order by shop_price;
+	需求:查询city表中所有数据，先按照country_id顺序排列，city_id逆序排列
+		select * from city order by country_id,city_id desc;
+b.分页
+	limit x,y
+	x:单独使用查询是前几行
+	x，y:查询x后面y条数据
+	需求:查询city表中前10行数据
+	select * from city limit 10;
+	需求:查询city表中11-15行数据
+	select * from city limit 10,5;
+
+2.表的约束
+	主键约束 列中的数是唯一的(不重复)，不能为空，每张表中只能有一个，针对于外键而言
+	唯一约束 列中的数是唯一的(不重复)，可以为空，作为主键约束的补充
+	非空约束 列中的数据不能为空
+	检查约束 列中的数据是否满足条件
+	外键约束 列中的数据依赖于另外一张表中的数据
+	默认值  default 数据
+	语法:
+	create table 表(
+		列 数据类型 primary key,
+		列 数据类型 unique,
+		列 数据类型 not null,
+		列 数据类型 check(检查条件),
+		列 数据类型 references 被参考表(被参考列)
+	)
+	外键约束
+	1.被参考表的被参考列一定存在，必须是主键约束
+	2.参考列和被参考列的数据类型必须一致
+--建表测试题目
+create table 宿舍表(
+		宿舍号  char(6) primary key,
+		宿舍电话 int check(宿舍电话>=6330000 and 宿舍电话<=6339999)
+);
+
+create table 同学表(
+		学号 char(6) primary key,
+		姓名 char(10) not null,
+		性别 char(10) check(性别='男' or 性别='女'),
+		年龄 int not null,
+		民族 char(20) default '汉' not null,
+		身份证号 char(30) unique,
+		宿舍号 char(6)  references 宿舍表(宿舍号)
+	)
