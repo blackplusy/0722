@@ -120,3 +120,66 @@ order by t1.姓名;
 2.select m.math,c.name,c.address,c.telno from cust c,mark m
   where c.studentno=m.studentno
   and c.studentno in (11,22,33,44,55)
+--8.jpg
+1.
+create table store_information(
+	name char(20) not null,
+	sales int not null,
+	date  date not null
+);
+2.
+alter table store_information add Memo char(20);
+3.
+alter table store_information change name store_name char(20);
+update store_information set store_name=replace(store_name,'店','分店');
+4.
+select store_name,date,avg(sales)  from store_information
+group by store_name,date;
+5.
+select store_name,sum(sales) from store_information
+group by store_name
+having sum(sales)>1000000;
+
+-----------------------------------------------------------------------------
+1.索引
+类似于一本书的目录
+优点:查询速度快
+缺点:降低增删改的效率
+语法:
+创建索引：create index 索引名 on 表(列);
+create index i_goods on goods(name);
+删除索引:alter table 表 drop index 索引名;
+alter table goods drop index i_goods;
+2.视图
+虚拟出来的表，是不存在的，通常通过视图来查看专门的数据，通常是只读
+视图中的数据都来源于真实表中的数据
+语法:
+创建视图:
+create view 视图名字
+as
+查询语句
+创建视图v_g,查询每个商品对应的分类名称
+create view v_g
+as
+select g.goods_name,c.cat_name  from   ecs_goods g,ecs_category c
+where g.cat_id=c.cat_id;
+
+查询视图内容：
+select * from v_g;
+
+删除视图：
+drop view 视图名字;
+drop view v_g;
+
+3.事务
+一件事有开始就一定要有结束
+Heygor========bank========老板们
+commit    提交数据到数据库中，除非认为修改否则数据不会变化
+rollback  数据库返回最后一次提交的状态
+
+4.存储过程
+写业务逻辑的，基础是SQL
+
+
+
+
