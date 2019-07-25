@@ -59,7 +59,7 @@ e.基础命令
 	use local
 			数据库切换为local	
 	show tables
-	show colletions
+	show collections
 			查看当前数据库中有哪些结合
 	db.startup_log.find()
 			查看startup_log集合中所有文档
