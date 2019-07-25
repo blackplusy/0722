@@ -1,0 +1,67 @@
+1.mongodb的安装
+a.mongodb的下载
+	官网:https://www.mongodb.com/download-center
+	操作系统类型：
+		win
+		linux
+		unix
+	操作系统位数
+		32位
+		64位
+b.mongodb的软件架构
+	c-----/-----s
+	b1.mongodb的服务
+		mongo    mongodb的客户端服务
+		mongod   mongodb的服务端服务
+	b2.mongodb的端口
+		27017
+c.mongodb的启动
+	c1.启动命令(命令提示符)
+		注意:e:\data一定要存在
+		mongod --dbpath e:\data
+		mongod --dbpath e:\data --logpath e:\data\mongo.log 
+		mongod  	主服务
+		--dbpath    数据存放路径
+		--logpath   日志存放位置
+	c2.启动方式
+		1>进入到命令所在文件夹
+		2>设置环境变量
+			计算机--属性--高级--环境变量--系统变量--Path中添加
+			;D:\迅雷下载\mongodb-win32-x86_64-2008plus-ssl-4.0.10\bin
+			确定--确定--确定
+			注意:设置完环境变量后一定要新开终端生效
+	c3.测试mongodb是否启动
+		1>查看进程
+			win+r--cmd--tasklist | find "mongod"
+			tasklist  查看win下进程
+			|         管道，前面输出作为后面输入
+			find      搜索
+		2>查看端口
+			win+r--cmd--netstat -an | find "27017"
+d.mongodb的登陆
+	mongo
+		登陆本地test数据库
+	mongo 127.0.0.1/admin
+		登陆IP地址位为127.0.0.1的admin数据库
+	mongo 127.0.0.1:27017/admin
+		登陆IP地址为127.0.0.1的admin数据库
+e.基础命令
+	mysql     mongodb
+	数据库     数据库
+	表         集合
+	数据       文档
+	mongodb中数据库由集合组成，集合由文档组成
+	show databases
+	show dbs
+			查看当前有哪些数据库
+	db
+			查看当前数据库的名字
+	use local
+			数据库切换为local	
+	show tables
+	show colletions
+			查看当前数据库中有哪些结合
+	db.startup_log.find()
+			查看startup_log集合中所有文档
+
+
