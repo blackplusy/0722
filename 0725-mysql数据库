@@ -100,3 +100,23 @@ create table 同学表(
 		身份证号 char(30) unique,
 		宿舍号 char(6)  references 宿舍表(宿舍号)
 	)
+--4.png
+1.
+1>select xm，zkzh from tb_student where score>0 and score<5;
+2>select * from tb_student where xm='张三' and score=5;
+2.select c.成绩表 from 学生表 s,成绩表 c
+where s.准考证号=c.zkzh
+and s.年龄 between 20 and 35
+order by 准考证号 desc;
+--2.png
+1.select count(*) from table1;
+2.select t2.学生家庭住址 from table1 t1,table2 t2
+where t1.学生id=t2.学生id
+and t1.姓名 like '张%'
+and t1.性别='女'
+order by t1.姓名;
+--5.bmp
+1.select avg(english) from mark;
+2.select m.math,c.name,c.address,c.telno from cust c,mark m
+  where c.studentno=m.studentno
+  and c.studentno in (11,22,33,44,55)
