@@ -1,0 +1,54 @@
+i.查询表达式
+	https://docs.mongodb.com/manual/reference/operator/query/
+	比较
+		$gt     大于
+		$lt     小于
+		$gte    大于等于
+		$lte    小于等于
+		$ne     不等于
+		db.xiyouji.find({age:{$gt:300}})
+		db.xiyouji.find({age:{$ne:800}})
+	关系
+		$and    同时满足
+		$or     满足一个即可
+		$not    不满足条件
+		db.xiyouji.find({$and:[{age:{$lt:500}},{name:'xtt'}]})
+		db.xiyouji.find({$or:[{name:'niumo'},{name:'gaga'}]},{_id:0})
+	存在性
+		$exists 属性是否存在
+		db.xiyouji.find({age:{$exists:1}})
+	数据类型
+		$type   数据的类型
+		数字     1
+		字符     2
+		对象     3
+		数组     4
+		二进制数据 5
+		对象id   7
+		布尔     8
+		日期     9
+		空       10
+		db.xiyouji.find({age:{$type:2}})
+j.文档的修改
+	语法:
+	db.集合.update({查询表达式},{设置条件},{多行操作})
+	修改文档指定属性
+		$set
+		db.xiyouji.update({name:'xtt'},{$set:{age:1000}})
+	覆盖
+		db.xiyouji.update({name:'xtt'},{age:999})
+	增长
+		$inc   可以增长也可以负增长
+		db.xiyouji.update({name:'niumo'},{$inc:{age:-200}})
+	重命名
+		$rename 
+		db.xiyouji.update({name:'niumo'},{$rename:{'age':'nianling'}})
+	多行修改
+		如果不特意去设置多行修改的话，默认只修改1行
+		db.xiyouji.update({name:'shasir'},{$set:{age:100}},{multi:true})
+k.文档的删除
+	删除指定文档
+		db.xiyouji.remove({name:'kingkong'})
+	删除所有文档
+		db.xiyouji.remove({})
+
