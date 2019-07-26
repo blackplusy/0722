@@ -91,4 +91,38 @@ b.rpm安装
 		ftp://linux的IP
 	11.共享文件
 		复制文件到/var/ftp下就可以通过网络共享
+c.yum自动安装
+	1.安装操作系统
+	2.设置IP、主机名、绑定主机名
+	3.关闭防火墙、关闭selinux
+	4.加载光驱
+		右键标签--设置--cd/dvd--已连接、启动时连接、使用iso映像文件--确定
+	5.创建一个空目录用于挂载
+		mkdir /yum
+	6.把光驱挂载到上面创建好的目录中
+		mount -o loop /dev/scd0 /yum
+	7.修改yum的配置文件
+		vim /etc/yum.repos.d/rhel-debuginfo.repo
+		[test]                             分类标签
+		name=test                          名字
+		baseurl=file:///yum/Server         yum到哪里去找软件包
+		enabled=1                          是否开启自动安装(1开启,0关闭)
+		gpgcheck=0                         关闭软件包检查(1开启，0关闭)
+	8.清理yum缓存
+		yum clean all
+	9.查看可以安装的软件列表
+		yum list
+	10.安装mysql相关服务
+		yum install mysql* -y
+		注意:-y自动安装依赖包
+	11.启动mysql服务
+		service mysqld start
+	12.检查服务和端口
+		ps -ef |grep mysqld
+		netstat -an |grep 3306
+
+
+
+
+
 
