@@ -1,0 +1,94 @@
+
+1.系统初始化设置
+a.安装操作系统
+b.设置IP
+	b1.虚拟机设置
+		桥接
+		仅主机
+		网络地转换
+	b2.linux的IP设置
+		1>临时设置
+			ifconfig eth0 10.10.101.8
+		2>命令设置
+			setup
+			注意:子网掩码、IP的地址
+			重启网络服务后生效
+		3>配置文件
+			vim /etc/sysconfig/network-scripts/ifcfg-eth0
+			DEVICE
+			BOOTPROTO     启动协议：dhcp(动态获取IP),static(静态设置IP)
+			HWADDR
+			ONBOOT 
+			IPADDR
+			NETMASK
+			GATEWAY
+			修改完配置文件后，重启网络服务生效
+c.设置主机名
+	查看主机名
+		hostname
+	临时设置
+		hostname heygor.com.cn
+	配置文件设置
+		vim /etc/sysconfig/network
+		HOSTNAME=heygor.com.cn
+d.绑定主机名
+	vim /etc/hosts
+	10.10.101.3   heygor.com.cn
+e.关闭防火墙
+	service iptables stop
+f.关闭selinux
+	vim /etc/selinux/config
+	SELINUX=disabled
+2.管理命令
+top         监控系统资源
+netstat -an 查看端口
+lsof -i:22  查看22号端口的连接情况
+free -m     查看内存
+vmstat      监控系统资源
+chkconfig   开机启动列表
+	chkconfig --level 35 iptables off
+kill  -9   pid  暴力杀
+      -15  pid  温柔杀
+ps -ef      查看系统所有进程
+pidof       查看pid
+mount      挂载
+df -h      查看磁盘使用率
+
+	
+3.系统的运行级别
+init 0  关机
+init 3  进入字符界面
+init 5  进入图形界面
+init 6  重启
+
+======================================================
+linux下软件的安装
+a.安装方式
+	1.rpm安装
+	2.yum自动安装
+	3.二进制文件安装
+	4.源码安装
+b.rpm安装
+	rhel中所有软件包都是rpm结尾
+	所有rpm包都在光盘Server目录下
+	vsftpd的安装
+	1.安装操作系统
+	2.设置IP、主机名、绑定主机名
+	3.关闭防火墙、关闭selinux
+	4.加载光驱
+		右键标签--设置--cd/dvd--已连接、启动时连接、使用iso映像文件--确定
+	5.输入命令mount查看type是iso9660的对应的目录
+		光驱:type iso9660
+	6.进入到光盘的Server目录中
+		cd /media/RHEL_5.4\ i386\ DVD/Server/
+	7.搜索vsftpd相关软件
+		ls |grep vsftpd
+	8.安装vsftpd服务
+		 rpm -ivh vsftpd-2.0.5-16.el5.i386.rpm
+	9.启动vsftpd服务
+		service vsftpd start
+	10.浏览器中输入
+		ftp://linux的IP
+	11.共享文件
+		复制文件到/var/ftp下就可以通过网络共享
+
