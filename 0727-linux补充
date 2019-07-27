@@ -1,0 +1,58 @@
+1.二进制软件包的安装和部署
+a.jdk的安装和配置
+	a1.下载jdk
+		jdk: java开发环境
+		jre: java运行环境
+		操作系统
+		操作系统位数
+	a2.把软件包传入linux中
+	a3.解压压缩包文件
+		tar -xzvf jdk-7u7-linux-i586.tar.gz
+	a4.重命名解压后的目录
+		 mv jdk1.7.0_07/ jdk
+	a5.设置环境变量
+		/etc/profile  	全局变量
+		~/.bash_profile 用户变量
+		vim .bash_profile 在PATH和export PATH中间添加
+		export JAVA_HOME=/root/jdk
+			java的软件所在目录
+		export PATH=$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH
+			添加java的命令所在路径到环境变量中
+		export CLASSPATH=.:$CLASSPATH:$JAVA_HOME/lib:$JAVA_HOME/jre/lib
+			添加java相关的库到环境变量中		
+	a6.查看java的版本
+		java -version
+	a7.使环境变量生效
+		source ~/.bash_profile
+		结果:java版本 1.7
+
+b.tomcat的安装和部署
+	tomcat7   jdk1.7
+	tomcat8   jdk1.8
+	b1.下载
+		linux/unix 下载.tar.gz结尾的文件
+	b2.把压缩包传入linux中
+	b3.解压压缩包
+		tar -xzvf apache-tomcat-7.0.77.tar.gz
+	b4.tomcat的目录结构
+		bin   			存放tomcat命令
+		conf   			存放配置文件位置
+		lib             存放库文件
+		logs    		存放日志位置
+		tmp             存放临时文件位置
+		webapps         存放web项目文件位置
+	b5.启动tomcat服务
+		1>进入到tomcat的bin目录
+			cd /root/apache-tomcat-7.0.77/bin/
+		2>执行bin目录中的startup.sh
+			./startup.sh
+	b6.测试
+		查看进程
+			ps -ef |grep tomcat
+		查看端口
+			netstat -an |grep 8080
+		浏览器中输入linux的ip:8080
+
+
+
+
