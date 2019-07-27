@@ -52,6 +52,51 @@ b.tomcat的安装和部署
 		查看端口
 			netstat -an |grep 8080
 		浏览器中输入linux的ip:8080
+c.tenorder项目环境部署
+	开发语言:	java
+	web服务器:   tomcat
+	数据库服务器: mysql
+	c1.安装操作系统
+	c2.设置IP地址、主机名、绑定主机名
+	c3.关闭防火墙、关闭selinux
+	c4.安装部署mysql
+		1>安装配置好yum
+		2>安装mysql相关软件
+			yum install mysql* -y
+		3>启动mysql服务
+			service mysqld start
+		4>给mysql设置密码
+			mysqladmin -u root password 'test'
+			mysql管理员root设置密码test
+	c5.删除tomcat的webapps中所有文件
+		rm -rf /root/apache-tomcat-7.0.77/webapps/*
+	c6.在win中把tenorder项目解压，传入tomcat的webapps中
+	c7.导入数据库
+		1>进入到tenorder.sql所在目录
+			cd /root/apache-tomcat-7.0.77/webapps/tenorder/
+		2>登陆mysql
+			mysql -u root -p
+		3>创建数据库ten
+			create database ten;
+		4>数据库切换为ten
+			use ten;
+		5>导入数据库
+			source tenorder.sql;
+	c8.修改配置文件信息
+		参考安装文档
+		 vim /root/apache-tomcat-7.0.77/webapps/tenorder/WEB-INF/classes/database.properties
+	c9.重启tomcat服务器
+		1>进入到tomcat的bin目录
+			cd /root/apache-tomcat-7.0.77/bin/
+		2>执行shutdown.sh
+		3>执行startup.sh
+	c10.访问测试
+		前台:linuxip:8080/tenorder
+		后台:linuxip:8080/tenorder/admin
+			admin
+			admin
+
+
 
 
 
